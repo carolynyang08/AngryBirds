@@ -1,9 +1,11 @@
 from ball import *
 import math
 from cmu_112_graphics import *
+from vector import*
+from slingshot import *
 from PIL import Image
 
-bird_radius = 30
+
 
 class Bird(Ball):
     STATES = ['resting', 'loaded', 'aiming', 'launched']
@@ -11,28 +13,40 @@ class Bird(Ball):
         super().__init__(x, y, r, app)
         self.restingPosition = Vector(self.position.x, self.position.y)
         self.state = Bird.STATES[0]
-        self.birdImage = app.loadImage(app, 'resources/images/red-bird3.png')
+        self.birdImage = app.loadImage('resources/images/red-bird2.png')
         #self.birdImage = app.scaleImage(tempImage, )
 
+    def isInCircle(self, x, y):
+        if math.sqrt((x-self.position.x)**2 +
+                     (y-self.position.y)**2) <= self.r:
+            return True
+        else:
+            return False
+
+    def mouseDragged(self, event):
+        x, y = RigidBody.convert_coordinates((event.x, event.y), self.app.height)
+        if self.state == Bird.STATES[0] and self.isInCircle(x, y):
+            self.state = Bird.STATES[1]
+            print(self.state)
+        elif self.state == Bird.STATES[1]:
+            self.position.x, self.position.y = x, y
+            pullVec = self.position - self.restingPosition
+            pullMag = pullVec.magnitude()
+            if pullMag > Slingshot.MAX:
+                pullVec = pullVec.unit() * Slingshot.MAX
+                self.position = self.restingPosition + pullVec
+            self.app.slingshot.mouseDragged(self.app.birds[0])
 
 
 
 
+    def draw(self, app, canvas):
+        x, y = RigidBody.convert_coordinates((self.position.x, self.position.y), app.height)
+        canvas.create_image(int(x), int(y), image=ImageTk.PhotoImage(self.birdImage))
+        canvas.create_oval(x - self.r, y - self.r, x + self.r, y + self.r,
+                           width=1, outline="black")
 
-
-
-        self.body = pymunk.Body(10)
-        self.body.position = 100, 300
-        self.shape = pymunk.Circle(self.body, bird_radius)
-        self.shape.density = 1
-        self.shape.elasticity = 0.8
-        self.shape.collision_type = 2
-        app.space.add(self.body, self.shape)
-        self.image1 = app.scaleImage(app.birdImage, 2 * (bird_radius / app.birdImage.size[0]))
-        # app.bird.sprites = []
-
-    def draw(self, canvas):
-        x, y = convert_coordinates(self.body.position)
-        canvas.create_image(int(x), int(y), image=ImageTk.PhotoImage(self.image1))
+        #x, y = convert_coordinates(self.body.position)
+        #canvas.create_image(int(x), int(y), image=ImageTk.PhotoImage(self.image1))
         # canvas.create_oval(int(x - app.ball_radius), int(y - app.ball_radius),
         # int(x + app.ball_radius), int(y + app.ball_radius), fill="yellow")
