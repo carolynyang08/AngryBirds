@@ -7,7 +7,7 @@ class Slingshot():
     max = 100
     def __init__(self, app, x):
         self.slingshotImage = app.loadImage('resources/images/sling.png')
-        self.imageWidth, self.imageHeight = self.slingshotImage.size()
+        self.imageWidth, self.imageHeight = self.slingshotImage.size
         self.x = x
         self.y = self.imageHeight//2
         self.slingX1, self.slingY1 = RigidBody.convert_coordinates((self.x - 30,\
@@ -20,8 +20,12 @@ class Slingshot():
         self.color = 'brown'
 
 
-
-
     def draw(self, app, canvas):
         canvas.create_image(self.px, self.py, image=ImageTk.PhotoImage(self.slingshotImage))
-        if self.state == 'pulled':
+        if self.state == Slingshot.STATES[1]:
+            x, y = RigidBody.convert_coordinates((self.centerx, self.centery), app.height)
+            canvas.create_line(x, y, self.slingX1, self.slingY1)
+            canvas.create_line(x, y, self.slingX2, self.slingY2)
+
+
+

@@ -6,7 +6,7 @@ from ground import *
 from ball import *
 from level import *
 from bird import*
-
+from slingshot import *
 
 
 def appStarted(app):
@@ -19,9 +19,9 @@ def resetApp(app, level):
     app.pigs = []
     app.ground = Ground(app)
     app.boards = []
-    app.slingshot = Slingshot(app.width//4, app)
+    app.slingshot = Slingshot(app, app.width//4)
     app.level = Level(app, app.birds, app.pigs, app.boards, app.ground, app.slingshot)
-    app.level.goToLevel(level)
+    app.level.goToLevel(1)
     app.stuffToRemove = []
 
 
@@ -34,8 +34,7 @@ def keyPressed(app, event):
 
 
 def timerFired(app):
-    app.space.step(1 / app.FPS)
-
+    pass
     # app.spriteCounter = (1 + app.spriteCounter) % len(app.sprites)
 
 
@@ -45,13 +44,13 @@ def convert_coordinates(point):
 
 def redrawAll(app, canvas):
     canvas.create_rectangle(0, 0, 800, 800, fill="yellow")
-    app.bird.draw(canvas)
+    '''app.bird.draw(canvas)
     app.slingshot.draw(canvas)
     app.floor.draw(canvas)
     app.pig.draw(canvas)
     app.woodplank1.draw(canvas)
     app.woodplank2.draw(canvas)
-
+    '''
 
 def playAngryBirds():
     runApp(width=800, height=800)
