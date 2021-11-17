@@ -52,14 +52,6 @@ def redrawAll(app, canvas):
         bird.draw(app, canvas)
 
 
-    '''app.bird.draw(canvas)
-    app.slingshot.draw(canvas)
-    app.floor.draw(canvas)
-    app.pig.draw(canvas)
-    app.woodplank1.draw(canvas)
-    app.woodplank2.draw(canvas)
-    '''
-
 
 runApp(width=1440, height=718)
 

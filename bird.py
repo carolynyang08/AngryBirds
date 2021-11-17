@@ -6,7 +6,6 @@ from slingshot import *
 from PIL import Image
 
 
-
 class Bird(Ball):
     STATES = ['resting', 'loaded', 'aiming', 'launched']
     def __init__(self, x, y, r, app):
@@ -14,7 +13,6 @@ class Bird(Ball):
         self.restingPosition = Vector(self.position.x, self.position.y)
         self.state = Bird.STATES[0]
         self.birdImage = app.loadImage('resources/images/red-bird2.png')
-        #self.birdImage = app.scaleImage(tempImage, )
 
     def isInCircle(self, x, y):
         if math.sqrt((x-self.position.x)**2 +
@@ -38,15 +36,8 @@ class Bird(Ball):
             self.app.slingshot.mouseDragged(self.app.birds[0])
 
 
-
-
     def draw(self, app, canvas):
         x, y = RigidBody.convert_coordinates((self.position.x, self.position.y), app.height)
         canvas.create_image(int(x), int(y), image=ImageTk.PhotoImage(self.birdImage))
         canvas.create_oval(x - self.r, y - self.r, x + self.r, y + self.r,
                            width=1, outline="black")
-
-        #x, y = convert_coordinates(self.body.position)
-        #canvas.create_image(int(x), int(y), image=ImageTk.PhotoImage(self.image1))
-        # canvas.create_oval(int(x - app.ball_radius), int(y - app.ball_radius),
-        # int(x + app.ball_radius), int(y + app.ball_radius), fill="yellow")
