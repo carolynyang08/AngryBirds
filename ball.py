@@ -6,6 +6,10 @@ from vector import *
 from PIL import Image
 
 class Ball(RigidBody):
+
+    ELASTICITY = 0.5
+    FRICTION = 0.5
+
     def __init__(self, x, y, r, app):
         self.app = app
         self.position = Vector(x, y)
@@ -19,7 +23,7 @@ class Ball(RigidBody):
         #vf = v0 + at
         self.velocity = self.velocity + self.acceleration
         if self.position.x <= 0 or self.position.x >= self.app.width:
-            self.app.stuffToRemove.append(self)
+            self.state == 'dead'
 
 
 

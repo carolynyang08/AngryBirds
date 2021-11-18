@@ -29,7 +29,7 @@ class Level():
                             (i * 4 * bird.r), 17, 17, Bird.STATES[0])
             self.birds.append(bird)
         for i in range(3):
-            pig = Pig(self.app, self.app.width//4 * 3 + (i) * 60, 30, 20)
+            pig = Pig(self.app, self.app.width//4 * 3 + i * 60, 30, 20)
             self.pigs.append(pig)
 
 

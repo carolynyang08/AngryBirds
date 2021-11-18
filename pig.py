@@ -5,8 +5,10 @@ from cmu_112_graphics import *
 from PIL import Image
 
 class Pig(Ball):
+    STATES = 'live', 'dead'
     def __init__(self, app, x, y, r):
         super().__init__(x, y, r, app)
+        self.state = Pig.STATES[0]
         tempImage = app.loadImage('resources/images/pig_failed.png')
         self.pigImage = app.scaleImage(tempImage, .25)
 
@@ -18,6 +20,9 @@ class Pig(Ball):
                            width=1, outline="black")
 
     def timerFired(self):
+        if self.position.y > 30:
+            self.acceleration.y = RigidBody.GRAVITY
         self.move()
+
 
 

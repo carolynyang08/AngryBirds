@@ -7,14 +7,12 @@ from PIL import Image
 
 
 class Bird(Ball):
-    STATES = ['resting', 'loaded', 'aiming', 'launched']
+    STATES = ['resting', 'loaded', 'aiming', 'launched', 'dead']
     def __init__(self, app, x, y, r, state):
         super().__init__(x, y, r, app)
         self.restingPosition = Vector(self.position.x, self.position.y)
         self.state = state
         self.birdImage = app.loadImage('resources/images/red-bird2.png')
-
-
 
     def isInCircle(self, x, y):
         if math.sqrt((x-self.position.x)**2 +
@@ -39,13 +37,15 @@ class Bird(Ball):
 
 
     def timerFired(self):
-        if self.state == Bird.STATES[3] or self.state == Bird.STATES[0]:
+        if self.position.y > 17:
+            self.acceleration.y = RigidBody.GRAVITY
+        ''' if self.position.y == 17:
+            self.acceleration.x = -Ball.FRICTION'''
+        if self.state == Bird.STATES[3]:
             self.move()
 
 
     def mouseReleased(self, event):
-        releasex, releasey = RigidBody.convert_coordinates((event.x, event.y),\
-                                                           self.app.height)
         if self.state == Bird.STATES[2]:
             self.state = Bird.STATES[3]
             self.acceleration = Vector(0, RigidBody.GRAVITY)
@@ -69,4 +69,5 @@ class Bird(Ball):
             plotx, ploty = RigidBody.convert_coordinates((x, y), app.height)
             canvas.create_oval(plotx - circleRadius, ploty - circleRadius, \
                           plotx + circleRadius, ploty + circleRadius, fill="white")
+
 
