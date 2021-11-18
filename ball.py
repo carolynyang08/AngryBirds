@@ -5,6 +5,7 @@ from rigidbody import *
 from vector import *
 from PIL import Image
 
+#
 class Ball(RigidBody):
 
     ELASTICITY = 0.5
