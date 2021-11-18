@@ -12,9 +12,9 @@ class Slingshot():
         self.x = x
         self.y = self.imageHeight//2
         self.slingX1, self.slingY1 = RigidBody.convert_coordinates((self.x - 30,\
-                                                                    self.y + 70), app.height)
+                                                        self.y + 70), app.height)
         self.slingX2, self.slingY2 = RigidBody.convert_coordinates((self.x + \
-                                                                    10, self.y + 70), app.height)
+                                                    10, self.y + 70), app.height)
         self.state = Slingshot.STATES[0]
         self.px, self.py = RigidBody.convert_coordinates((self.x, self.y), app.height)
         self.centerx, self.centery = (self.slingX1 + self.slingX2) // 2, self.slingY1
@@ -22,9 +22,14 @@ class Slingshot():
         self.app = app
 
     def mouseDragged(self, bird):
-        if bird.state == bird.STATES[1]:
+        if bird.state == bird.STATES[2]:
             self.state = Slingshot.STATES[1]
             self.centerx, self.centery = bird.position.x, bird.position.y
+
+    def mouseReleased(self, bird):
+        self.state = Slingshot.STATES[0]
+        self.centerx, self.centery = (self.slingX1 + self.slingX2) // 2, self.slingY1
+
 
     def draw(self, app, canvas):
         canvas.create_image(self.px, self.py, image=ImageTk.PhotoImage(self.slingshotImage))

@@ -33,10 +33,18 @@ def mouseDragged(app, event):
     if app.birds:
         app.birds[0].mouseDragged(event)
 
+def mouseReleased(app, event):
+    if app.birds:
+        app.birds[0].mouseReleased(event)
+
+
 
 def timerFired(app):
-    pass
-    # app.spriteCounter = (1 + app.spriteCounter) % len(app.sprites)
+    for bird in app.birds:
+        bird.timerFired()
+    for pig in app.pigs:
+        pig.timerFired()
+
 
 
 def convert_coordinates(point, app):

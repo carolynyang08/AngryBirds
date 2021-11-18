@@ -15,7 +15,7 @@ class Ball(RigidBody):
 
     def move(self):
         #xf = x0 + v0*t + .5*a*t^2
-        self.position = self.position + self.velocity + .5*self.acceleration
+        self.position = self.position + self.velocity + self.acceleration * .5
         #vf = v0 + at
         self.velocity = self.velocity + self.acceleration
         if self.position.x <= 0 or self.position.x >= self.app.width:

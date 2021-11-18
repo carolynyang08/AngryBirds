@@ -19,10 +19,19 @@ class Level():
             self.level1()
 
     def level1(self):
-        bird = Bird(self.app.width/4 - 12, self.app.slingshot.imageHeight - 35, 17, self.app)
-        self.birds.append(bird)
-        pig = Pig(self.app.width//4 * 3, 30, 20, self.app)
-        self.pigs.append(pig)
+        for i in range(3):
+            if i == 0:
+                bird = Bird(self.app, self.app.width // 4 - 12, \
+                            self.app.slingshot.imageHeight - 35, 17,\
+                            Bird.STATES[1])
+            else:
+                bird = Bird(self.app, self.app.width//4 - 12 -\
+                            (i * 4 * bird.r), 17, 17, Bird.STATES[0])
+            self.birds.append(bird)
+        for i in range(3):
+            pig = Pig(self.app, self.app.width//4 * 3 + (i) * 60, 30, 20)
+            self.pigs.append(pig)
+
 
 
 
