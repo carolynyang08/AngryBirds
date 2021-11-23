@@ -32,6 +32,11 @@ class Vector():
         else:
             return Vector(self.x/self.magnitude(), self.y/self.magnitude())
 
+    def cross(self, other):
+        return self.x * other.y - self.y * other.x
+
+    def normal(self):
+        return Vector(-self.y, self.x)
 
 
 
