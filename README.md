@@ -1,7 +1,10 @@
+# Angry Birds:
+
+## Description: 
 My 15-112 term project is Angry Birds. In this game, users will be able to strategically launch birds to destroy pigs. Pigs become destroyed when hit by any object therefore depending on the level, users will aim birds at specific locations in order to cause specific collisions to occur that would result in the pig being hit. The user’s end goal is to receive the highest score possible, therefore, hitting as many pigs as possible. 
 
 
-How to run the project:
+## How to Run:
 Users should run the AngryBirds file in their editor. 
 
 
