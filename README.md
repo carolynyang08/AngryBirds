@@ -24,3 +24,7 @@ Press ‘M” to return to the menu
 Press “R” to generate a random game
 Press “G”  to go to the game
 Press "N” to go to the next level
+
+
+https://user-images.githubusercontent.com/94516200/212560971-5e1564bb-3264-4375-aa89-08c8e6218339.mp4
+
